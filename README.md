@@ -150,3 +150,4 @@ They are appropriate when long-term organizational scaling and independent evolu
 - Led architectural decisions and codebase structure
 - Guided junior contributors and task distribution
 - Acted as the primary technical reference for architectural discussions with stakeholders
+- Translated a high-level institutional proposal into concrete frontend architectural decisions
