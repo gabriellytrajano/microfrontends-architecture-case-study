@@ -20,7 +20,9 @@ This project emerged as a proof of concept for a new platform intended to:
 - scale across teams and domains
 - evolve independently over time
 
-The primary challenge was designing a frontend architecture capable of long-term maintainability and organizational scalability under institutional uncertainty and constrained resources.
+The initiative emerged from the limitations observed in existing legacy academic management systems, which are typically monolithic and not designed for modern usability or scalability.
+
+Rather than proposing an immediate full replacement, the proof of concept was intentionally designed to explore an alternative architecture capable of supporting progressive adoption and coexistence with legacy platforms.
 
 ---
 
