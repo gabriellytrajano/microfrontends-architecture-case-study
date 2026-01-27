@@ -45,6 +45,16 @@ As a result, all UI components were designed and implemented manually.
 
 ---
 
+## Non-Functional Drivers
+
+The architectural decisions were primarily driven by the following non-functional requirements:
+
+- **Independent deployments** to reduce coordination overhead
+- **Clear domain ownership** to support future multi-team development
+- **Controlled blast radius** to limit the impact of changes
+- **Long-term maintainability** over short-term delivery speed
+- **Flexibility under institutional uncertainty**
+
 ## Alternatives Considered
 
 ### Monolithic SPA
@@ -65,7 +75,7 @@ As a result, all UI components were designed and implemented manually.
 
 ---
 
-## Architectural Decisions
+## Key Architectural Decisions
 
 - **Micro Frontends** were proposed and defended as a strategic choice to support long-term organizational scalability.
 - **Module Federation (Webpack 5)** was selected for runtime composition and shared dependency management.
@@ -99,13 +109,12 @@ Inter-MFE communication was intentionally limited to navigation boundaries.
 
 ## Trade-offs & Risks
 
-- Increased architectural and operational complexity
-- Need for governance and versioning discipline
-- Higher initial setup cost compared to monolithic approaches
+- Increased operational complexity compared to a monolithic SPA
+- Higher onboarding cost for new contributors
+- Need for explicit governance to avoid fragmentation
+- Risk of overengineering if projected scale does not materialize
 
-These trade-offs were consciously accepted based on the projected growth and institutional context.
-
----
+These risks were consciously accepted due to the platform’s projected growth and institutional context.
 
 ## When I Would / Would Not Use This Again
 
@@ -123,3 +132,14 @@ They are appropriate when long-term organizational scaling and independent evolu
 - Selected core technologies
 - Led architectural decisions and codebase structure
 - Guided junior contributors and task distribution
+
+- ## What Was Intentionally Out of Scope
+
+The proof of concept deliberately avoided:
+
+- Cross-MFE shared global state
+- Advanced runtime orchestration
+- Multi-tenant configuration strategies
+- Complex CI/CD pipelines
+
+These concerns were deferred to prevent premature complexity and keep the PoC focused on architectural validation.
