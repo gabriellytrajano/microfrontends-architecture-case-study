@@ -152,4 +152,5 @@ São apropriados quando há expectativa real de escalabilidade organizacional e 
 - Proposição e validação da adoção de Micro Frontends  
 - Seleção das tecnologias base  
 - Liderança das decisões arquiteturais e da estrutura do código  
-- Orientação de contribuidores juniores e distribuição de tarefas  
+- Orientação de contribuidores juniores e distribuição de tarefas-
+- Tradução de uma proposta institucional de alto nível em decisões arquiteturais concretas de frontend
