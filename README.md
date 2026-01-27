@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This repository documents a real-world architecture case study for a scalable academic management platform with potential national adoption.
+This repository documents a real-world architecture case study focused on decision-making under scale, organizational growth, and institutional constraints.
 
 I acted as Frontend Technical Lead, responsible for defining the frontend architecture, proposing and validating the use of Micro Frontends with Module Federation, and selecting Angular 17 as the core framework based on stability and enterprise suitability.
 
@@ -107,6 +107,19 @@ Inter-MFE communication was intentionally limited to navigation boundaries.
 
 ---
 
+## What Was Intentionally Out of Scope
+
+The proof of concept deliberately avoided:
+
+- Cross-MFE shared global state
+- Advanced runtime orchestration
+- Multi-tenant configuration strategies
+- Complex CI/CD pipelines
+
+These concerns were deferred to prevent premature complexity and keep the PoC focused on architectural validation.
+
+---
+
 ## Trade-offs & Risks
 
 - Increased operational complexity compared to a monolithic SPA
@@ -132,14 +145,4 @@ They are appropriate when long-term organizational scaling and independent evolu
 - Selected core technologies
 - Led architectural decisions and codebase structure
 - Guided junior contributors and task distribution
-
-- ## What Was Intentionally Out of Scope
-
-The proof of concept deliberately avoided:
-
-- Cross-MFE shared global state
-- Advanced runtime orchestration
-- Multi-tenant configuration strategies
-- Complex CI/CD pipelines
-
-These concerns were deferred to prevent premature complexity and keep the PoC focused on architectural validation.
+- Acted as the primary technical reference for architectural discussions with stakeholders
