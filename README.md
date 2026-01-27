@@ -1,3 +1,5 @@
+Leia também em português: [README.pt-BR.md](README.pt-br.md)
+
 # Micro Frontends Architecture Case Study (Angular)
 
 ## Executive Summary
