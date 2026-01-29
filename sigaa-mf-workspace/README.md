@@ -27,13 +27,6 @@ A descrição detalhada da arquitetura, estrutura dos microfrontends, responsabi
 
 >[Micro Frontends – PoC](docs/microfrontends-poc.md)
 
-![Arquitetura](./docs/Arquitetura.jpg)
-
-_Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
-
-Versão PDF:
-[Desenho da arquitetura em PDF](./docs/Arquitetura.pdf)
-
 ## Stack Tecnológica
 
 - Angular 17 (versão mais estável para MicroFrontends)

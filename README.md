@@ -95,6 +95,13 @@ Todas as decisões arquiteturais de frontend foram lideradas e validadas pela Fr
 
 ## Desenho Técnico
 
+![Arquitetura](./sigaa-mf-workspace/docs/Arquitetura.jpeg)
+
+_Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
+
+Versão PDF:
+[Desenho da arquitetura em PDF](./sigaa-mf-workspace/docs/Arquitetura.pdf)
+
 - **Shell Application**
   - Ponto de entrada da aplicação
   - Orquestração de rotas
