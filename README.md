@@ -1,153 +1,156 @@
-_Leia também em português_ 🥇 [README.pt-BR.md](README.pt-br.md)
+_Read in English:_ [English ver.](README-ENG.md)
 
-# Micro Frontends Architecture Case Study (Angular)
+# Micro Frontends – Case Study de Arquitetura (Angular)
 
-## Executive Summary
+## Resumo Executivo
 
-This repository documents a real-world architecture case study focused on decision-making under scale, organizational growth, and institutional constraints.
+Este repositório documenta um case study real de arquitetura frontend para uma plataforma de gestão acadêmica escalável, com potencial de adoção em nível nacional.
 
-I acted as Frontend Technical Lead, responsible for defining the frontend architecture, proposing and validating the use of Micro Frontends with Module Federation, and selecting Angular 17 as the core framework based on stability and enterprise suitability.
+Atuei como **Frontend Technical Lead**, sendo responsável por definir a arquitetura frontend, propor e validar o uso de Micro Frontends com Module Federation e selecionar o Angular 17 como framework base, priorizando estabilidade e adequação a ambientes corporativos.
 
-Despite being initially developed by a small team and under tooling and funding constraints, the architecture was intentionally designed to support long-term scalability, independent domain evolution, and organizational growth.
-
----
-
-## Context & Problem
-
-Legacy academic management systems used by Brazilian public universities are typically monolithic, tightly coupled, and poorly suited for modern usability and scalability requirements.
-
-This project emerged as a proof of concept for a new platform intended to:
-- support multiple public universities
-- allow institutional autonomy
-- scale across teams and domains
-- evolve independently over time
-
-The initiative emerged from the limitations observed in existing legacy academic management systems, which are typically monolithic and not designed for modern usability or scalability.
-
-Rather than proposing an immediate full replacement, the proof of concept was intentionally designed to explore an alternative architecture capable of supporting progressive adoption and coexistence with legacy platforms.
+Apesar de ter sido inicialmente desenvolvido por um time pequeno e sob restrições de ferramentas e financiamento, a arquitetura foi intencionalmente projetada para suportar escalabilidade de longo prazo, evolução independente de domínios e crescimento organizacional.
 
 ---
 
-## Constraints & Assumptions
+## Contexto e Problema
 
-### Institutional
-- Initial deployment limited to a single university (UFCG)
-- Future expansion dependent on governmental approval and funding (MEC)
-- No predefined migration strategy from legacy systems
+Sistemas legados de gestão acadêmica utilizados por universidades públicas brasileiras são, em geral, monolíticos, fortemente acoplados e pouco adequados a requisitos modernos de usabilidade e escalabilidade.
 
-### Technical
-- Backend designed around decoupled microservices
-- Frontend required to support independent evolution of domains
-- Architecture needed to remain flexible regarding adoption strategy
+Este projeto surgiu como uma prova de conceito para uma nova plataforma com o objetivo de:
 
-### Design & Tooling
-- No initial government funding
-- Design team operating with free-tier tools
-- No access to paid UI kits or component libraries
+- atender múltiplas universidades públicas  
+- permitir autonomia institucional  
+- escalar entre times e domínios  
+- evoluir de forma independente ao longo do tempo  
 
-As a result, all UI components were designed and implemented manually.
+O principal desafio foi projetar uma arquitetura frontend capaz de sustentar manutenibilidade de longo prazo e escalabilidade organizacional em um contexto de incerteza institucional e recursos limitados.
 
 ---
 
-## Non-Functional Drivers
+## Restrições e Premissas
 
-The architectural decisions were primarily driven by the following non-functional requirements:
+### Institucionais
+- Implantação inicial limitada a uma única universidade (UFCG)
+- Expansão futura condicionada à aprovação e financiamento governamental (MEC)
+- Ausência de uma estratégia de migração previamente definida a partir de sistemas legados
 
-- **Independent deployments** to reduce coordination overhead
-- **Clear domain ownership** to support future multi-team development
-- **Controlled blast radius** to limit the impact of changes
-- **Long-term maintainability** over short-term delivery speed
-- **Flexibility under institutional uncertainty**
+### Técnicas
+- Backend projetado com base em microserviços desacoplados
+- Frontend com necessidade de evolução independente entre domínios
+- Arquitetura flexível quanto a estratégias de adoção e implantação
 
-## Alternatives Considered
+### Design e Ferramentas
+- Ausência de financiamento governamental inicial
+- Time de design operando com ferramentas gratuitas
+- Sem acesso a bibliotecas pagas de componentes ou UI kits
 
-### Monolithic SPA
-- Simpler initial setup
-- High coupling and centralized deployment  
-→ Rejected due to scalability risks
-
-### Modular Monolith
-- Improved internal structure
-- Still a single deployment unit  
-→ Insufficient for organizational scaling
-
-### Micro Frontends with Module Federation
-- Independent deployments
-- Clear domain ownership
-- Alignment with backend microservices  
-→ Selected for validation despite higher complexity
+Como consequência, todos os componentes de interface foram desenhados e implementados manualmente.
 
 ---
 
-## Key Architectural Decisions
+## Drivers Não Funcionais
 
-- **Micro Frontends** were proposed and defended as a strategic choice to support long-term organizational scalability.
-- **Module Federation (Webpack 5)** was selected for runtime composition and shared dependency management.
-- **Angular 17** was chosen for framework maturity, stability, and enterprise readiness.
-- A **Shared UI Library** was introduced early to centralize reusable components and ensure visual consistency under tooling constraints.
+As decisões arquiteturais foram principalmente orientadas pelos seguintes requisitos não funcionais:
 
-All frontend architectural decisions were led and validated by the Frontend Technical Lead.
+- **Deploys independentes**, reduzindo overhead de coordenação
+- **Clareza de ownership de domínios**, suportando crescimento futuro de times
+- **Blast radius controlado**, limitando o impacto de mudanças
+- **Manutenibilidade de longo prazo** acima de velocidade inicial de entrega
+- **Flexibilidade diante de incertezas institucionais**
 
 ---
 
-## Technical Design
+## Alternativas Avaliadas
+
+### SPA Monolítica
+- Setup inicial mais simples
+- Alto acoplamento e deploy centralizado  
+→ Rejeitada devido a riscos de escalabilidade
+
+### Monólito Modular
+- Melhor organização interna
+- Ainda um único artefato de deploy  
+→ Insuficiente para escalar organizacionalmente
+
+### Micro Frontends com Module Federation
+- Deploys independentes
+- Clareza de domínios
+- Alinhamento com backend em microserviços  
+→ Selecionada para validação, apesar da maior complexidade
+
+---
+
+## Principais Decisões Arquiteturais
+
+- **Micro Frontends** foram propostos e defendidos como uma escolha estratégica para suportar escalabilidade organizacional de longo prazo.
+- **Module Federation (Webpack 5)** foi selecionado para composição em tempo de execução e compartilhamento controlado de dependências.
+- **Angular 17** foi escolhido por maturidade do framework, estabilidade e adequação a aplicações de grande porte.
+- Uma **Shared UI Library** foi introduzida desde o início para centralizar componentes reutilizáveis e garantir consistência visual sob restrições de tooling.
+
+Todas as decisões arquiteturais de frontend foram lideradas e validadas pela Frontend Technical Lead.
+
+---
+
+## Desenho Técnico
 
 - **Shell Application**
-  - Entry point
-  - Routing orchestration
-  - Dynamic loading of MFEs
+  - Ponto de entrada da aplicação
+  - Orquestração de rotas
+  - Carregamento dinâmico dos MFEs
 
 - **Micro Frontends**
-  - Isolated by functional domain
-  - Independently deployed
-  - No direct coupling between MFEs
+  - Isolados por domínio funcional
+  - Deploy independente
+  - Ausência de acoplamento direto entre MFEs
 
 - **Shared UI Library**
-  - Reusable UI components
-  - Consistent visual patterns
-  - Manual implementation using semantic HTML and utility-based styling
+  - Componentes reutilizáveis
+  - Padrões visuais consistentes
+  - Implementação manual com HTML semântico e estilos utilitários
 
-Inter-MFE communication was intentionally limited to navigation boundaries.
-
----
-
-## What Was Intentionally Out of Scope
-
-The proof of concept deliberately avoided:
-
-- Cross-MFE shared global state
-- Advanced runtime orchestration
-- Multi-tenant configuration strategies
-- Complex CI/CD pipelines
-
-These concerns were deferred to prevent premature complexity and keep the PoC focused on architectural validation.
+A comunicação entre MFEs foi intencionalmente limitada a limites de navegação.
 
 ---
 
-## Trade-offs & Risks
+## O Que Ficou Intencionalmente Fora do Escopo
 
-- Increased operational complexity compared to a monolithic SPA
-- Higher onboarding cost for new contributors
-- Need for explicit governance to avoid fragmentation
-- Risk of overengineering if projected scale does not materialize
+A prova de conceito evitou deliberadamente:
 
-These risks were consciously accepted due to the platform’s projected growth and institutional context.
+- Estado global compartilhado entre MFEs
+- Orquestração avançada em runtime
+- Estratégias de configuração multi-tenant
+- Pipelines de CI/CD complexos
 
-## When I Would / Would Not Use This Again
-
-Micro Frontends should not be chosen based on current team size, but on the expected trajectory of the system.
-
-They are appropriate when long-term organizational scaling and independent evolution are expected, even if the initial team is small. They should be avoided when applications are expected to remain small and stable over time.
+Esses pontos foram adiados para evitar complexidade prematura e manter o foco da PoC na validação arquitetural.
 
 ---
 
-## Role & Responsibilities
+## Trade-offs e Riscos
+
+- Complexidade operacional maior em comparação a uma SPA monolítica
+- Custo mais alto de onboarding para novos contribuidores
+- Necessidade de governança explícita para evitar fragmentação
+- Risco de overengineering caso a escala projetada não se concretize
+
+Esses riscos foram conscientemente aceitos considerando o contexto institucional e a projeção de crescimento da plataforma.
+
+---
+
+## Quando Usaria / Quando Não Usaria Novamente
+
+Micro Frontends não devem ser escolhidos com base no tamanho atual do time, mas sim na trajetória esperada do sistema.
+
+São apropriados quando há expectativa real de escalabilidade organizacional e evolução independente, mesmo com um time inicial reduzido. Devem ser evitados em aplicações que se espera permanecerem pequenas e estáveis ao longo do tempo.
+
+---
+
+## Papel e Responsabilidades
 
 **Frontend Technical Lead**
-- Defined frontend architecture
-- Proposed and validated Micro Frontend adoption
-- Selected core technologies
-- Led architectural decisions and codebase structure
-- Guided junior contributors and task distribution
-- Acted as the primary technical reference for architectural discussions with stakeholders
-- Translated a high-level institutional proposal into concrete frontend architectural decisions
+
+- Definição da arquitetura frontend  
+- Proposição e validação da adoção de Micro Frontends  
+- Seleção das tecnologias base  
+- Liderança das decisões arquiteturais e da estrutura do código  
+- Orientação de contribuidores juniores e distribuição de tarefas-
+- Tradução de uma proposta institucional de alto nível em decisões arquiteturais concretas de frontend
