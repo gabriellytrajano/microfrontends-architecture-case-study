@@ -26,7 +26,11 @@ Este projeto faz parte de uma Prova de Conceito (PoC) baseada em arquitetura de 
 A descrição detalhada da arquitetura, estrutura dos microfrontends, responsabilidades de cada aplicação e cenários de uso está documentada no arquivo abaixo:
 
 >[Micro Frontends – PoC](docs/microfrontends-poc.md)
->[Arquitetura](./docs/Arquitetura.jpg)
+![Arquitetura](./docs/Arquitetura.jpg)
+
+_Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
+
+Versão completa:
 [PDF](./docs/Arquitetura.pdf)
 
 ## Stack Tecnológica
