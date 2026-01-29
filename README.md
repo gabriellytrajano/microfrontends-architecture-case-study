@@ -95,7 +95,7 @@ Todas as decisões arquiteturais de frontend foram lideradas e validadas pela Fr
 
 ## Desenho Técnico
 
-![Arquitetura](./sigaa-mf-workspace/docs/Arquitetura.jpeg)
+![Arquitetura](./sigaa-mf-workspace/docs/Arquitetura.jpg)
 
 _Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
 
