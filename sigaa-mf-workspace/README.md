@@ -1,27 +1,52 @@
-# SigaaMfWorkspace
+## Sobre
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Aplicação Frontend para gestão de Usuários, Papéis, Permissões, Recursos e Progressão de Docente em um Sistema de Gestão Unificado, desenvolvido para um contexto Institucional e Acadêmico.
 
-## Development server
+Esta é a **versão 1.0.0**, correspondente à primeira entrega estável do projeto, apresentada como **DEMO**.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Escopo da Versão
 
-## Code scaffolding
+A versão 1.0.0 contempla as seguintes funcionalidades:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Edição e listagem de Usuários;
+- Cadastro, edição e listagem de Papéis;
+- Cadastro, Edição e listagem de Permissões;
+- Edição e listagem de Recursos;
+- Associação de Usuários a Papéis;
+- Definição e gerenciamento de Permissões;
+- Gerenciamento de Recursos vinculados às Permissões;
+- Listagem de dados com paginação;
+- Interface funcional para demonstração (DEMO), com padrões visuais consistentes e fluxos de navegação estruturados.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Arquitetura 
 
-## Running unit tests
+Este projeto faz parte de uma Prova de Conceito (PoC) baseada em arquitetura de **Micro Frontends**, utilizando **Module Federation** para composição de aplicações frontend independentes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A descrição detalhada da arquitetura, estrutura dos microfrontends, responsabilidades de cada aplicação e cenários de uso está documentada no arquivo abaixo:
 
-## Running end-to-end tests
+>[Micro Frontends – PoC](docs/microfrontends-poc.md)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Stack Tecnológica
 
-## Further help
+- Angular 17 (versão mais estável para MicroFrontends)
+- TypeScript
+- SCSS
+- Webpack 5 (Module Federation)
+- Prettier
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Como Rodar o Projeto
+
+Navegue para a pasta de Workspace:
+```cd sigaa-mf-workspace```
+
+Instale as dependências do projeto:
+```npm install```
+
+Se for a primeira vez buildando o projeto, builde todos os mfes:
+```npm run:run all```
+
+## Scripts Úteis
+
+Para formatar o projeto com Prettier:
+```npm run format```
