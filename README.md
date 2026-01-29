@@ -10,7 +10,7 @@ Atuei como **Frontend Technical Lead**, sendo responsável por definir a arquite
 
 Apesar de ter sido inicialmente desenvolvido por um time pequeno e sob restrições de ferramentas e financiamento, a arquitetura foi intencionalmente projetada para suportar escalabilidade de longo prazo, evolução independente de domínios e crescimento organizacional.
 
-[Detalhes ténicos podem ser encontrados aqui!](/sigaa-mf-workspace/docs/microfrontends-poc.md) 🏹
+[Leitura adicional & Referências](/sigaa-mf-workspace/docs/microfrontends-poc.md) 🏹
 
 ---
 
