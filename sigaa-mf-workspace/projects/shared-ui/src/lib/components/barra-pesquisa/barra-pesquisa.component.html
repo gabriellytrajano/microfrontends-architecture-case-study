@@ -1,0 +1,21 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="w-full px-5 py-2 border border-gray-600 rounded-lg bg-transparent flex items-center"
+>
+  <input
+    type="text"
+    formControlName="query"
+    (input)="aoMudarValor($event)"
+    [placeholder]="placeholder"
+    class="flex-1 bg-transparent outline-none text-base text-white placeholder-white/40"
+  />
+
+  <button
+    type="submit"
+    class="w-8 h-8 flex items-center justify-center text-white/60"
+    aria-label="Pesquisar"
+  >
+    <i class="fi fi-rr-search text-sm leading-none"></i>
+  </button>
+</form>

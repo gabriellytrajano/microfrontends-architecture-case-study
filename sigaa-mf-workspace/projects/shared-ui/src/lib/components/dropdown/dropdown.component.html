@@ -1,0 +1,20 @@
+@if (open) {
+  <div
+    class="absolute z-50 mt-2 bg-[#1e2939] border border-neutral-400/30 rounded-lg shadow-lg text-white"
+    [class]="{
+      'top-full': this.topFull,
+      'right-0': this.rightZero,
+    }"
+    [style.overflow]="this.overflow"
+    [style.height]="this.dimensions.height"
+    [style.width]="this.dimensions.width"
+    [style.max-width]="this.dimensions.maxWidth"
+    [style.max-height]="this.dimensions.maxHeight"
+    [style.min-width]="this.dimensions.minWidth"
+    [style.min-height]="this.dimensions.minHeight"
+  >
+    <div class="flex flex-col" [class]="{ 'py-2': this.paddingPadrao }">
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

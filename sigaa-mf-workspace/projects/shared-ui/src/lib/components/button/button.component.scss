@@ -1,0 +1,42 @@
+:host {
+  @apply flex items-center gap-2 border font-semibold rounded-lg py-1 px-4 transition-colors;
+}
+
+/* PRIMARY */
+:host[data-variant='primary'] {
+  @apply border-cyan-500 text-cyan-500;
+}
+
+:host[data-variant='primary']:not([disabled]) {
+  @apply hover:bg-cyan-500 hover:text-white;
+}
+
+:host[data-variant='primary'][disabled] {
+  @apply cursor-not-allowed text-cyan-500/50 border-cyan-500/50;
+}
+
+/* GRAY */
+:host[data-variant='gray'] {
+  @apply border-current text-neutral-400;
+}
+
+:host[data-variant='gray']:not([disabled]) {
+  @apply hover:bg-white/5;
+}
+
+:host[data-variant='gray'][disabled] {
+  @apply cursor-not-allowed text-neutral-400/50;
+}
+
+/* RED */
+:host[data-variant='red'] {
+  @apply border-0 bg-red-600 text-white;
+
+  &:not([disabled]) {
+    @apply hover:bg-red-500 hover:text-white;
+  }
+
+  &[disabled] {
+    @apply cursor-not-allowed text-white/50 bg-red-600/50;
+  }
+}

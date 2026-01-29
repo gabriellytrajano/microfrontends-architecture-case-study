@@ -1,0 +1,44 @@
+<div class="flex flex-row items-center">
+  <span
+    class="text-sm text-neutral-300 inline-flex flex-row overflow-x-auto scrollbar-thin w-full pb-3"
+  >
+    @for (permissao of recurso().permissoes; track $index) {
+      <span
+        class="px-3 py-[3px] mx-0.5 bg-[#1A233E] text-[#30ACED] border border-transparent rounded-lg text-nowrap"
+      >
+        {{ permissao.nome }}
+      </span>
+    }
+  </span>
+
+  <div>
+    <button
+      class="mx-6 relative inline-block"
+      (click)="alternarVisibilidadeMaisOpcoes()"
+    >
+      <i class="fi fi-rr-menu-dots hover:text-[#30aced]"></i>
+    </button>
+
+    <lib-dropdown
+      [open]="maisOpcoesVisivel()"
+      [paddingPadrao]="false"
+      [topFull]="true"
+      class="relative"
+    >
+      <button (click)="editarRecurso()">
+        <div
+          class="w-full flex flex-row items-center px-3.5 py-1.5 hover:text-[#30aced]"
+        >
+          <i class="fi fi-rr-pencil"></i><span class="mx-2">Editar</span>
+        </div>
+      </button>
+      <button (click)="removerRecurso()">
+        <div
+          class="w-full flex flex-row items-center px-3.5 py-1.5 hover:text-[#30aced]"
+        >
+          <i class="fi fi-rr-trash"></i><span class="mx-2">Remover</span>
+        </div>
+      </button>
+    </lib-dropdown>
+  </div>
+</div>

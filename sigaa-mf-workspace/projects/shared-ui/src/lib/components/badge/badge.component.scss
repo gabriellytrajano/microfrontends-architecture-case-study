@@ -1,0 +1,25 @@
+:host {
+  @apply border rounded-full px-4 py-0.5 inline-flex items-center justify-center text-sm font-medium;
+}
+
+/* Variantes de cor */
+
+:host[data-variant='gray'] {
+  @apply text-[#707B84] border-[#707B84] bg-[#1D2635];
+}
+
+:host[data-variant='blue'] {
+  @apply text-[#3D6DFF]/70 border-[#3D6DFF]/70 bg-[#1A233E]/20;
+}
+
+:host[data-variant='green'] {
+  @apply text-[#04C565] border-[#04C565] bg-[#122D13];
+}
+
+:host[data-variant='cyan'] {
+  @apply text-[#30ACED] border-[#30ACED] bg-[#1A233E];
+}
+
+:host[data-variant='yellow'] {
+  @apply text-[#D8A331B2] border-[#D8A331B2] bg-[#2E2111];
+}

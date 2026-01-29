@@ -1,0 +1,17 @@
+<div
+  class="absolute top-0 right-0 m-8 rounded-lg bg-slate-800 flex items-center gap-3 border border-neutral-400/30 py-3 px-5 transition-opacity duration-150 ease-in-out"
+  [class.opacity-0]="!visible"
+  [class.opacity-100]="visible"
+>
+  <div class="flex-1">
+    <ng-content></ng-content>
+  </div>
+
+  <button
+    type="button"
+    (click)="closed.emit()"
+    class="text-neutral-400 flex items-center justify-center"
+  >
+    <i class="fi fi-rr-cross-small inline-flex"></i>
+  </button>
+</div>

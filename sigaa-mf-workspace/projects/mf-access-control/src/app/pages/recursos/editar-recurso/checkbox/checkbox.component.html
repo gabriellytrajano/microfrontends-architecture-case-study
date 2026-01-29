@@ -1,0 +1,13 @@
+<div
+  class="flex items-center justify-center w-3.5 h-3.5 border border-[#323A48] rounded-[4px]"
+  (click)="aoClicar()"
+>
+  <div
+    class="w-2 h-2 rounded-[2px]"
+    [class]="{
+      'bg-[#30ACED]': this.selecionado,
+      'bg-transparent': !this.selecionado,
+      'w-3 h-3': true,
+    }"
+  ></div>
+</div>

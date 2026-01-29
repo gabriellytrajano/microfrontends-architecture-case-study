@@ -1,0 +1,94 @@
+<nav class="flex-1 px-3 py-4 space-y-1 text-sm">
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i
+      class="fi fi-rr-house-chimney text-[#6A7282] text-[16px] leading-[18px]"
+    ></i>
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="bg-slate-800 text-white"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Dashboard
+    </a>
+  </div>
+
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i class="fi fi-rr-user text-[#6A7282] text-[16px] leading-[18px]"></i>
+    <a
+      routerLink="/users"
+      routerLinkActive="bg-slate-800 text-white"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Usuário
+    </a>
+  </div>
+
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i class="fi fi-rr-lock text-[#6A7282] text-[16px] leading-[18px]"></i>
+    <a
+      routerLink="/access-control/permissions"
+      routerLinkActive="bg-slate-800 text-white"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Permissão
+    </a>
+  </div>
+
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i class="fi fi-rr-id-badge text-[#6A7282] text-[16px] leading-[18px]"></i>
+    <a
+      routerLink="/access-control/roles"
+      routerLinkActive="bg-slate-800 text-white"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Papéis
+    </a>
+  </div>
+
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i class="fi fi-rr-settings text-[#6A7282] text-[16px] leading-[18px]"></i>
+    <a
+      routerLink="/access-control/recursos"
+      routerLinkActive="bg-slate-800 text-white"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Recursos
+    </a>
+  </div>
+
+  <div
+    routerLinkActive="bg-slate-800 text-white"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-800"
+  >
+    <i class="fi fi-rr-apps text-[#6A7282] text-[16px] leading-[18px]"></i>
+    <a
+      routerLink="/outros"
+      routerLinkActive="bg-slate-800 text-white"
+      class="text-slate-300 hover:bg-slate-800 hover:text-white text-[16px] leading-[18px]"
+    >
+      Outros
+    </a>
+  </div>
+</nav>

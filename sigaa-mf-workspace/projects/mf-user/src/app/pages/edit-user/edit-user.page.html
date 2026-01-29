@@ -1,0 +1,148 @@
+<div class="pt-5 pl-20 flex flex-col gap-6">
+  <lib-breadcrumb-component label="Editar Usuário" />
+
+  <div>
+    <h2 class="text-xl font-medium">Editar Usuário</h2>
+    <h3 class="text-sm text-neutral-400">
+      Gerencie usuários e acessos do sistema
+    </h3>
+  </div>
+
+  <!-- Card -->
+  <div
+    class="border border-neutral-400/30 rounded-xl px-6 py-4 flex flex-col gap-6 w-full max-w-[1440px]"
+  >
+    <div class="flex flex-row justify-items gap-6">
+      <div class="flex-shrink-0">
+        <div class="w-16 h-16 rounded-full bg-neutral-800"></div>
+      </div>
+
+      <div class="flex-1 flex-row">
+        <form [formGroup]="form" class="flex flex-col gap-6">
+          <!-- Nome -->
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <label class="py-2 text-left text-sm font-medium text-[#F4F4F5]"
+                >Nome Completo</label
+              >
+              <div class="border border-neutral-400/30 rounded-xl px-3.5 py-1">
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="w-full bg-transparent text-[12px] leading-[16.5px] font-normal text-[#364153] placeholder:text-neutral-400 outline-none"
+                />
+              </div>
+            </div>
+            <!-- Email -->
+            <div>
+              <label class="py-2 text-left text-sm font-medium text-[#F4F4F5]"
+                >E-mail</label
+              >
+              <div class="border border-neutral-400/30 rounded-xl px-3.5 py-1">
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="w-full bg-transparent text-[12px] leading-[16.5px] font-normal text-[#364153] placeholder:text-neutral-400 outline-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Linha 2: CPF + Papel -->
+          <div class="grid grid-cols-2 gap-6">
+            <!-- CPF -->
+            <div class="flex flex-col gap-1">
+              <label class="py-2 text-left text-sm font-medium text-[#F4F4F5]"
+                >CPF</label
+              >
+              <div
+                class="border flex border-neutral-400/30 rounded-xl px-3.5 py-1"
+              >
+                <input
+                  type="text"
+                  formControlName="cpf"
+                  class="flex-1 text-[#364153] input opacity-60 bg-transparent cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            <!-- Papel (single select) -->
+            <div class="flex flex-col gap-1 relative">
+              <label class="py-2 text-left text-sm font-medium text-[#F4F4F5]"
+                >Papel</label
+              >
+
+              <!-- Campo dropdown -->
+              <div class="border border-neutral-400/30 rounded-xl px-3.5 py-1">
+                <div
+                  class="input flex items-center justify-between cursor-pointer"
+                  (click)="dropdownOpen.set(!dropdownOpen())"
+                >
+                  <span class="text-[#364153] text-sm">
+                    {{ papelSelecionado() || 'Selecione' }}
+                  </span>
+                  <i class="fi fi-rr-angle-small-down"></i>
+                </div>
+              </div>
+
+              <!-- Lista de papéis -->
+              @if (dropdownOpen()) {
+              <div
+                class="absolute top-full left-0 mt-1 w-full bg-neutral-900 border border-neutral-400/30 rounded-lg z-50 max-h-48 overflow-auto"
+              >
+                @for (papel of roles(); track papel.nome) {
+                <div
+                  class="px-4 py-2 cursor-pointer hover:bg-neutral-800"
+                  (click)="selecionarPapel(papel.nome)"
+                >
+                  {{ papel.nome }}
+                </div>
+                }
+              </div>
+              }
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr class="border-neutral-400/30" />
+    <div>
+      <!-- Footer -->
+      <div class="flex flex-1 justify-between">
+        <div>
+          <button
+            lib-button
+            variant="gray"
+            data-variant="gray"
+            (click)="voltar()"
+          >
+            <i class="fi fi-rr-arrow-small-left inline-flex text-xl"></i>
+            Voltar
+          </button>
+        </div>
+
+        <div class="flex gap-2">
+          <button
+            lib-button
+            variant="gray"
+            data-variant="gray"
+            (click)="cancelar()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            lib-button
+            type="button"
+            variant="primary"
+            [attr.disabled]="(form.invalid || form.pristine || loading()) ? '' : null"
+            (click)="salvar()"
+          >
+            <i class="fi fi-rr-disk inline-flex"></i>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

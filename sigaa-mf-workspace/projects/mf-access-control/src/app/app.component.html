@@ -1,0 +1,17 @@
+<!-- só copiei aqui pra testar, não é permanente! -->
+
+<div class="flex flex-col min-h-screen">
+  <header class="h-16 w-full border-b border-white/10">
+    <span class="p-4 flex">Navbar</span>
+  </header>
+
+  <div class="flex flex-1">
+    <aside class="w-64 min-h-full border-r border-white/10">
+      <span class="p-4 flex">Sidebar</span>
+    </aside>
+
+    <main class="flex-1 overflow-auto flex flex-col">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

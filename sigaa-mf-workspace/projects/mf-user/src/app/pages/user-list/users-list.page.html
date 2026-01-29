@@ -1,0 +1,94 @@
+<div class="pt-5 pl-20 flex flex-col gap-6">
+  <!-- Breadcrumb -->
+  <lib-breadcrumb-component label="Usuário"></lib-breadcrumb-component>
+
+  <!-- Título -->
+  <div>
+    <h2 class="text-xl font-medium">Gerenciamento de Usuários</h2>
+    <h3 class="text-sm text-neutral-400">
+      Gerencie usuários e acessos ao sistema
+    </h3>
+  </div>
+
+  <!-- Busca -->
+  <div class="max-w-[1450px] w-full">
+    <lib-barra-de-busca
+      placeholder="Buscar por nome, e-mail ou CPF"
+      (pesquisar)="onSearch($event)"
+    >
+    </lib-barra-de-busca>
+  </div>
+
+  <!-- Card da tabela -->
+  <div
+    class="max-w-[1450px] w-full border border-white/10 rounded-lg p-5 flex flex-col gap-4"
+  >
+    <!-- Área scrollável da tabela -->
+    <div class="max-h-[520px] overflow-y-auto scrollbar-thin">
+      <lib-user-table [columns]="columns()" [data]="users()">
+        <!-- TEMPLATE: Usuário -->
+        <ng-template #userTpl let-user>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-sm font-semibold text-white"
+            >
+              {{ user.name.charAt(0) }}
+            </div>
+
+            <div class="flex flex-col">
+              <span class="font-medium text-white leading-tight">
+                {{ user.name }}
+              </span>
+              <span class="text-sm text-neutral-400 leading-tight">
+                {{ user.email }}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+        <!-- TEMPLATE: Papéis -->
+        <ng-template #papeisTpl let-user>
+          @if (user.papel; as papel) {
+          <lib-badge>{{ papel }}</lib-badge>
+          }
+        </ng-template>
+        <!-- TEMPLATE: Ações -->
+        <ng-template #actionsTpl let-user>
+          <div class="relative flex items-center justify-end">
+            <button
+              type="button"
+              class="select-none text-neutral-400 hover:text-cyan-500"
+              (click)="dropdown.toggleMenu()"
+            >
+              <i class="fi fi-rr-menu-dots flex text-2xl"></i>
+            </button>
+
+            <app-user-dropdown
+              #dropdown
+              [editLink]="['edit', user.cpf]"
+              (remove)="onRemove(user)"
+            />
+          </div>
+        </ng-template>
+      </lib-user-table>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="w-full flex items-center justify-between">
+      <lib-table-results-info
+        [from]="from()"
+        [to]="to()"
+        [total]="total()"
+        label="resultados"
+      >
+      </lib-table-results-info>
+
+      <lib-paginacao-botoes
+        [totalPages]="totalPages()"
+        [currentPage]="page()"
+        [window]="5"
+        (pageChange)="onPageChange($event)"
+      >
+      </lib-paginacao-botoes>
+    </div>
+  </div>
+</div>

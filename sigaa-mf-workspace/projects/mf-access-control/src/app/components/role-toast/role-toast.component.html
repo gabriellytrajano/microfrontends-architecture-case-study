@@ -1,0 +1,12 @@
+<lib-toast [visible]="visible" (closed)="close()" [class.hidden]="!visible">
+  <div class="flex items-center gap-3">
+    @if (variant == 'ok') {
+      <i class="fi fi-rr-check-circle text-2xl text-green-500 inline-flex"></i>
+    } @else if (variant == 'error') {
+      <i class="fi fi-rr-cross-circle text-2xl text-red-500 inline-flex"></i>
+    }
+    <div class="flex flex-col">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</lib-toast>

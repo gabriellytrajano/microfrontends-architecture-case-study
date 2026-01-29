@@ -1,0 +1,66 @@
+<div class="py-5 px-20 flex flex-col gap-6 h-full">
+  <lib-breadcrumb-component
+    label="Recurso"
+    class="shrink-0 grow-0"
+  ></lib-breadcrumb-component>
+
+  <!-- Título -->
+  <div
+    class="flex items-start justify-between max-w-[1450px] w-full shrink-0 grow-0"
+  >
+    <div>
+      <h2 class="text-xl font-medium">Gerenciamento de recursos do sistema</h2>
+      <h3 class="text-sm text-neutral-400">
+        Gerencie permissões requisitados dos recursos
+      </h3>
+    </div>
+  </div>
+
+  <ng-template #modeloPermissoes let-recurso>
+    <permissoes-recurso [recurso]="recurso"></permissoes-recurso>
+  </ng-template>
+
+  @if (this.loading()) {
+  <lib-spinner class="flex flex-row items-center justify-center"></lib-spinner>
+  } @else {
+  <div class="max-w-[1450px] w-full">
+    <lib-barra-de-busca
+      placeholder="Buscar por identificador"
+      (aoDigitar)="pesquisarPorRecurso($event)"
+    >
+    </lib-barra-de-busca>
+  </div>
+
+  <div
+    class="max-w-[1450px] min-h-0 w-full h-full border border-white/10 rounded-lg p-5 flex flex-col gap-4"
+  >
+    <div class="overflow-y-auto scrollbar-thin h-full">
+      <lib-table
+        [columns]="colunas()"
+        [data]="recursosVisiveis()"
+        class="block"
+        tableLayout="fixed"
+      >
+      </lib-table>
+    </div>
+
+    <div class="max-w-[1450px] w-full flex items-center justify-between">
+      <lib-table-results-info
+        [from]="from()"
+        [to]="to()"
+        [total]="total()"
+        label="resultados"
+      >
+      </lib-table-results-info>
+
+      <lib-paginacao-botoes
+        [totalPages]="totalPages()"
+        [currentPage]="page()"
+        [window]="5"
+        (pageChange)="onPageChange($event)"
+      >
+      </lib-paginacao-botoes>
+    </div>
+  </div>
+  }
+</div>

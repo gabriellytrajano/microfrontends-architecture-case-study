@@ -1,0 +1,24 @@
+<nav class="flex items-center gap-[20px] h-[18px] opacity-100 text-sm">
+  @if (this.usarIconeAlternativo) {
+    <ng-content select="[i]"></ng-content>
+  } @else {
+    <i
+      class="fi fi-rr-house-chimney text-[#6A7282] text-[16px] leading-[18px]"
+    ></i>
+  }
+  @for (label of this.recuperarLabels(); track $index) {
+    <i
+      class="fi fi-rr-angle-small-right text-[#6A7282] text-[16px] leading-[18px]"
+    ></i>
+
+    <span
+      class="font-semibold text-[16px] leading-[18px]"
+      [class]="{
+        'text-[#30ACED]': this.ehUltimaLabel(label),
+        'text-[#707B84]': !this.ehUltimaLabel(label),
+      }"
+    >
+      {{ label }}
+    </span>
+  }
+</nav>

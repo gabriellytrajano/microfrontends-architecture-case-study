@@ -1,0 +1,24 @@
+<dialog
+  #dialog
+  class="absolute top-full left-auto right-0 z-10 min-w-44 bg-[#1e2939] border border-neutral-400/30 rounded-lg shadow-lg text-white overflow-clip"
+>
+  <div class="flex flex-col">
+    <a
+      [routerLink]="editLink"
+      class="hover:bg-white/30 px-6 py-2 flex items-center gap-3"
+      (click)="close()"
+    >
+      <i class="fi fi-rr-pencil inline-flex"></i>
+      Editar
+    </a>
+
+    <button
+      type="button"
+      class="hover:bg-white/30 px-6 py-2 flex items-center gap-3 cursor-pointer"
+      (click)="onRemove()"
+    >
+      <i class="fi fi-rr-trash inline-flex"></i>
+      Remover
+    </button>
+  </div>
+</dialog>

@@ -1,0 +1,42 @@
+<table class="w-full" [class.table-fixed]="tableLayout === 'fixed'">
+  <thead class="border-b border-white/10">
+    <tr>
+      @for (col of columns; track col.key) {
+        <th
+          class="py-2 px-2 text-left text-sm font-medium text-neutral-400"
+          [class.text-right]="col.align === 'right'"
+          [class.text-center]="col.align === 'center'"
+          [style.width]="col.width ?? ''"
+        >
+          {{ col.header }}
+        </th>
+      }
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (row of data; track row) {
+      <tr class="border-b border-white/10 last:border-b-0">
+        @for (col of columns; track col.key) {
+          <td
+            class="py-3 px-2 text-sm text-neutral-200 align-middle"
+            [class.text-right]="col.align === 'right'"
+            [class.text-center]="col.align === 'center'"
+            [style.width]="col.width ?? ''"
+          >
+            @if (col.cellTemplate) {
+              <ng-container
+                *ngTemplateOutlet="
+                  col.cellTemplate;
+                  context: { $implicit: row }
+                "
+              ></ng-container>
+            } @else {
+              {{ getCellValue(row, col.key) }}
+            }
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

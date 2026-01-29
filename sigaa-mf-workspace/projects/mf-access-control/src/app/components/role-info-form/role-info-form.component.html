@@ -1,0 +1,71 @@
+<div class="border border-neutral-400/30 rounded-lg p-5 flex flex-col">
+  <form class="flex flex-wrap gap-4">
+    <div class="flex flex-col max-w-96 flex-1 gap-3 justify-between">
+      <label class="flex flex-col">
+        Papel
+        <div
+          class="flex items-center border border-neutral-400/30 rounded-lg pr-2 gap-3 focus-within:border-cyan-500 cursor-text"
+        >
+          <input
+            [(ngModel)]="nome"
+            name="papel-nome"
+            type="text"
+            placeholder="Nome do papel"
+            class="flex-1 bg-transparent py-2 pl-4 focus:outline-none"
+          />
+        </div>
+      </label>
+
+      <label>
+        Permissões
+        <app-permissao-picker
+          [permissoesAtivas]="permissoes"
+          (selecionar)="this.selecionarPermissao($event)"
+        />
+      </label>
+    </div>
+
+    <label class="flex flex-col flex-1">
+      Descrição
+      <div
+        class="flex flex-col border border-neutral-400/30 rounded-lg p-4 focus-within:border-cyan-500 cursor-text"
+      >
+        <textarea
+          [(ngModel)]="descricao"
+          name="papel-descricao"
+          type="text"
+          placeholder="Descreva o novo papel"
+          class="bg-transparent min-h-[3lh] box-content resize-none focus:outline-none"
+        ></textarea>
+        <span class="self-end text-sm text-neutral-400 select-none"
+          >{{ descricao.length }}/500</span
+        >
+      </div>
+    </label>
+  </form>
+
+  <hr class="my-4 border-neutral-400/30" />
+
+  <div class="flex items-center gap-4">
+    <a lib-button [routerLink]="editar ? '../..' : '..'" variant="gray">
+      <i class="fi fi-rr-arrow-small-left inline-flex text-xl"></i>
+      Voltar
+    </a>
+    <div class="flex-1"></div>
+    <button lib-button (click)="clear()" variant="gray">Cancelar</button>
+    <button
+      lib-button
+      (click)="doSave()"
+      [disabled]="loading || !(nome.length && descricao.length)"
+    >
+      @if (loading) {
+        <lib-spinner />
+      } @else if (editar) {
+        <i class="fi fi-rr-disk inline-flex"></i>
+      } @else {
+        <i class="fi fi-rr-plus inline-flex"></i>
+      }
+      {{ editar ? 'Salvar' : 'Add Novo Papel' }}
+    </button>
+  </div>
+</div>

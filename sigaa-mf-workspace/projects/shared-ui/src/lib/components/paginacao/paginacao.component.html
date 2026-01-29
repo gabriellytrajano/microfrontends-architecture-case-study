@@ -1,0 +1,37 @@
+<div class="flex items-center text-neutral-300">
+  <!-- Previous -->
+  <button
+    type="button"
+    class="border border-neutral-400/30 w-8 h-8 rounded-l-lg flex items-center justify-center hover:bg-white/5"
+    [class.opacity-50]="isFirst()"
+    [class.pointer-events-none]="isFirst()"
+    (click)="previous()"
+  >
+    <i class="fi fi-rr-angle-small-left inline-flex"></i>
+  </button>
+
+  @for (page of pages(); track page) {
+    <button
+      type="button"
+      class="border h-8 min-w-8 select-none hover:bg-white/5"
+      [ngClass]="{
+        'border-cyan-500 text-cyan-500': page === currentPage(),
+        'border-neutral-400/30': page !== currentPage(),
+      }"
+      (click)="goTo(page)"
+    >
+      {{ page }}
+    </button>
+  }
+
+  <!-- Next -->
+  <button
+    type="button"
+    class="border border-neutral-400/30 w-8 h-8 rounded-r-lg flex items-center justify-center hover:bg-white/5"
+    [class.opacity-50]="isLast()"
+    [class.pointer-events-none]="isLast()"
+    (click)="next()"
+  >
+    <i class="fi fi-rr-angle-small-right inline-flex"></i>
+  </button>
+</div>

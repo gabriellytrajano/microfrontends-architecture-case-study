@@ -1,0 +1,85 @@
+<lib-breadcrumb-component label="Papéis" />
+
+<div class="flex items-start justify-between">
+  <div>
+    <h2 class="text-xl font-medium">Gerenciamento de Papéis</h2>
+    <h3 class="text-sm text-neutral-400">Gerencie papéis aos usuários</h3>
+  </div>
+
+  <a lib-button routerLink="./new">
+    <i class="fi fi-rr-plus flex"></i>
+    Novo Papel
+  </a>
+</div>
+
+<ng-template #nomeTpl let-funcao>
+  <lib-badge data-variant="green">{{ funcao.nome }}</lib-badge>
+</ng-template>
+
+<ng-template #menuTpl let-funcao>
+  <div class="relative flex items-center justify-end">
+    <app-role-dropdown
+      #dropdown
+      editLink="./edit/{{ funcao.id }}"
+      (remove)="this.onRemove(funcao)"
+      class="peer"
+    />
+    <button
+      class="select-none text-neutral-400 peer-open:text-cyan-500"
+      (click)="dropdown.show()"
+    >
+      <i class="fi fi-rr-menu-dots flex text-2xl"></i>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #permissoesTpl let-funcao>
+  <span class="inline-flex overflow-x-auto max-w-[20vw] scrollbar-thin">
+    @for (perm of funcao.permissoes; track $index) {
+      <span
+        class="px-3 py-[3px] mx-0.5 bg-[#1A233E] text-[#30ACED] border border-transparent rounded-lg text-nowrap"
+      >
+        {{ perm.nome }}
+      </span>
+    }
+  </span>
+</ng-template>
+
+@if (funcoes$ | async; as dto) {
+  <div
+    class="border border-neutral-400/30 rounded-lg p-5 flex flex-col justify-between flex-1"
+  >
+    <div class="relative flex-1">
+      <app-role-table
+        [columns]="columns"
+        [data]="dto.conteudo"
+        class="absolute inset-0 pr-3 overflow-y-auto scrollbar-thin"
+      />
+    </div>
+
+    <div class="flex justify-between items-center mt-5">
+      <lib-table-results-info
+        [from]="dto.pagina * dto.tamanhoPagina + 1"
+        [to]="(dto.pagina + 1) * dto.tamanhoPagina"
+        [total]="dto.total"
+      />
+
+      <lib-paginacao-botoes
+        [totalPages]="dto.totalPaginas"
+        [currentPage]="curPage"
+        (pageChange)="setPage($event)"
+      />
+    </div>
+  </div>
+} @else if (error) {
+  <p>Houve um erro</p>
+} @else {
+  <lib-spinner class="m-2 text-3xl text-white/50" />
+}
+
+<lib-confirm-modal
+  #removeDialog
+  title="Remover Papel"
+  subtitle="Você tem certeza que deseja remover este item?"
+  (confirm)="onConfirmRemove()"
+/>

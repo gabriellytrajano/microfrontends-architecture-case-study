@@ -1,0 +1,34 @@
+<lib-breadcrumb-component [label]="['Papéis', 'Editar Papel']" />
+
+<div class="flex items-start justify-between">
+  <div>
+    <h2 class="text-xl font-medium">Editar Papel</h2>
+    <h3 class="text-sm text-neutral-400">Gerencie papéis aos usuários</h3>
+  </div>
+</div>
+
+@if (funcao$ | async; as funcao) {
+  <app-role-info-form
+    [nome]="funcao.nome"
+    [descricao]="funcao.descricao"
+    [permissoes]="funcao.permissoes"
+    [editar]="true"
+    #form
+    (saved)="onSave(form, funcao, $event)"
+  />
+} @else if (error) {
+  <!-- n sei oq botar aqui -->
+  <p>Houve um erro ao buscar este papel.</p>
+} @else {
+  <lib-spinner class="m-2 text-3xl text-white/50" />
+}
+
+<app-role-toast #toastOk>
+  <p class="text-sm font-medium">Salvo</p>
+  <p class="text-sm">Informações salvas com sucesso</p>
+</app-role-toast>
+
+<app-role-toast #toastErro variant="error">
+  <p class="text-sm font-medium">Erro</p>
+  <p class="text-sm">Houve um erro</p>
+</app-role-toast>

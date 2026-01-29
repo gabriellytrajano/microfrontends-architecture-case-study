@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+    "target": "https://caju.teste.sti.ufcg.edu.br/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

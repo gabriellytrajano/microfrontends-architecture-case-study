@@ -1,0 +1,38 @@
+<div
+  class="flex items-center border border-neutral-400/30 rounded-lg pr-2 focus-within:border-cyan-500 cursor-text relative"
+>
+  <input
+    type="text"
+    placeholder="Buscar permissões"
+    class="flex-1 bg-transparent py-2 pl-4 focus:outline-none"
+    (click)="this.abrir()"
+  />
+  <button class="flex items-center p-1 text-gray-500" (click)="this.toggle()">
+    <i
+      class="fi inline-flex"
+      [class.fi-rr-angle-small-down]="!open"
+      [class.fi-rr-angle-small-up]="open"
+    ></i>
+  </button>
+
+  <lib-dropdown
+    [open]="open"
+    [rightZero]="true"
+    overflow="auto"
+    [dimensions]="{ maxHeight: '20vh', minWidth: '100%' }"
+  >
+    @for (perm of permissoes(); track perm.id) {
+      <label
+        class="select-none cursor-pointer hover:bg-white/20 flex items-center gap-2 px-2"
+      >
+        <input
+          type="checkbox"
+          class="accent-cyan-500"
+          (change)="this.onChange(perm, $event)"
+          [checked]="this.ehSelecionada(perm.id)"
+        />
+        {{ perm.nome }}
+      </label>
+    }
+  </lib-dropdown>
+</div>

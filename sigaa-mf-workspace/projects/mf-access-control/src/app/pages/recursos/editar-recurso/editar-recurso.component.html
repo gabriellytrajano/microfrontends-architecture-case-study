@@ -1,0 +1,126 @@
+<div class="py-5 px-20 flex flex-col gap-6 h-full">
+  <lib-breadcrumb-component
+    [label]="['Permissão', 'Editar']"
+    class="shrink1 grow-0"
+  ></lib-breadcrumb-component>
+
+  <!-- Título -->
+  <div
+    class="flex items-start justify-between max-w-[1450px] w-full shrink-0 grow-0"
+  >
+    <div>
+      <h2 class="text-xl font-medium">Edição de Recurso</h2>
+      <h3 class="text-sm text-neutral-400">
+        Modifique permissões requisitados do recurso e sua descrição
+      </h3>
+    </div>
+  </div>
+
+  <form
+    [formGroup]="this.form"
+    class="flex flex-col px-5 py-3.5 border rounded-lg border-[#2D3141] gap-2.5"
+  >
+    <div class="flex flex-row gap-3.5">
+      <div class="flex-1 flex flex-col gap-2 min-w-0 max-w-[50%]">
+        <div class="flex flex-col text-[11px]">
+          <span>Identificador do recurso</span>
+
+          <input
+            type="text"
+            [disabled]="true"
+            [value]="this.recurso?.nome"
+            class="bg-transparent border border-[#323A48] rounded-md py-2 pl-5 pr-3 mt-1 text-[#323A48]"
+          />
+        </div>
+
+        <div class="flex flex-col text-[11px] gap-0.5">
+          <span>Permissões requeridas</span>
+
+          <div class="relative flex flex-col">
+            <div
+              class="flex flex-row items-center text-[11px] border border-[#323A48] rounded-md min-w-0 max-w-full"
+            >
+              <input
+                (click)="abrirDropdown()"
+                (keyup)="pesquisarPermissao()"
+                type="text"
+                formControlName="permissao"
+                placeholder="Buscar permissões"
+                class="rounded-md py-2 pl-5 mt-1 flex-1 outline-none bg-transparent min-w-0"
+              />
+
+              <button (click)="alternarEstadoDropdown()" class="px-3">
+                @if (dropdownAberto()) {
+                  <i class="fi fi-rr-angle-small-up"></i>
+                } @else {
+                  <i class="fi fi-rr-angle-small-down"></i>
+                }
+              </button>
+            </div>
+
+            <lib-dropdown
+              [open]="dropdownAberto()"
+              [rightZero]="false"
+              overflow="auto"
+              [dimensions]="{ maxHeight: '20vh', minWidth: '100%' }"
+              class="max-w-full"
+            >
+              @for (permissao of this.permissoesVisiveis(); track $index) {
+                <div
+                  class="flex flex-row gap-2 px-3.5 py-1 items-center"
+                  (click)="alternarSelecaoPermissao(permissao)"
+                >
+                  <app-checkbox
+                    [selecionado]="this.permissaoEstaSelecionada(permissao)"
+                  ></app-checkbox>
+
+                  <label
+                    class="flex-1 text-xs select-none"
+                    [for]="permissao.nome"
+                    >{{ permissao.nome }}</label
+                  >
+                </div>
+              }
+            </lib-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 flex flex-col gap-0.5 text-[11px] min-w-0 max-w-[50%]">
+        <span>Descrição</span>
+
+        <textarea
+          [value]="this.recurso?.descricao"
+          formControlName="descricao"
+          placeholder="Descrição do recurso"
+          class="border border-[#323A48] rounded-md py-2 pl-5 mt-1 flex-1 bg-transparent text"
+        ></textarea>
+      </div>
+    </div>
+    <div class="border-t border-[#323A48]"></div>
+    <div class="flex flex-row justify-between">
+      <div>
+        <button
+          class="inline-flex flex-row gap-2 items-center border border-[#707B84] rounded-lg py-2 px-3.5 text-[#707B84] text-xs"
+          (click)="this.voltar()"
+        >
+          <i class="fi fi-rr-arrow-left text-xs"></i><span>Voltar</span>
+        </button>
+      </div>
+      <div class="inline-flex flex-row gap-2">
+        <button
+          class="inline-flex flex-row gap-2 items-center border border-[#707B84] rounded-lg py-2 px-3.5 text-[#707B84] text-xs"
+          (click)="this.cancelar()"
+        >
+          <span>Cancelar</span>
+        </button>
+        <button
+          class="inline-flex flex-row gap-2 items-center border border-[#164E6B] rounded-lg py-2 px-3.5 text-[#164E6B] text-xs"
+          (click)="this.salvar()"
+        >
+          <i class="fi fi-rr-disk"></i><span>Salvar</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

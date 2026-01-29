@@ -1,0 +1,67 @@
+<div class="pt-5 pl-20 flex flex-col gap-6">
+  <!-- Breadcrumb -->
+  <lib-breadcrumb-component label="Permissão"></lib-breadcrumb-component>
+
+  <!-- Título -->
+  <div class="flex items-start justify-between max-w-[1450px] w-full">
+    <div>
+      <h2 class="text-xl font-medium">Gerenciamento de Permissões</h2>
+      <h3 class="text-sm text-neutral-400">Gerencie permissões aos usuários</h3>
+    </div>
+
+    <button lib-button variant="primary" (click)="onCreate()">
+      <i class="fi fi-rr-plus"></i>
+      Nova Permissão
+    </button>
+  </div>
+
+  <!-- Busca -->
+  <div class="max-w-[1450px] w-full">
+    <lib-barra-de-busca
+      placeholder="Buscar por ID"
+      (pesquisar)="onSearch($event)"
+    >
+    </lib-barra-de-busca>
+  </div>
+
+  <!-- Card da tabela -->
+  <div
+    class="max-w-[1450px] w-full border border-white/10 rounded-lg p-5 flex flex-col gap-4"
+  >
+    <!-- Área scrollável da tabela -->
+    <div class="max-h-[520px] overflow-y-auto scrollbar-thin">
+      <!-- Tabela -->
+      <lib-table [columns]="columns()" [data]="permissionsVisiveis()">
+        <!-- TEMPLATE: Identificador -->
+        <ng-template #identifierTpl let-permission>
+          <span class="text-sm text-white"> {{ permission.identifier }} </span>
+        </ng-template>
+
+        <!-- TEMPLATE: Descrição -->
+        <ng-template #descriptionTpl let-permission>
+          <span class="text-sm text-neutral-300">
+            {{ permission.description }}
+          </span>
+        </ng-template>
+      </lib-table>
+    </div>
+    <!-- FOOTER -->
+    <div class="max-w-[1450px] w-full flex items-center justify-between">
+      <lib-table-results-info
+        [from]="from()"
+        [to]="to()"
+        [total]="total()"
+        label="resultados"
+      >
+      </lib-table-results-info>
+
+      <lib-paginacao-botoes
+        [totalPages]="totalPages()"
+        [currentPage]="page()"
+        [window]="5"
+        (pageChange)="onPageChange($event)"
+      >
+      </lib-paginacao-botoes>
+    </div>
+  </div>
+</div>
