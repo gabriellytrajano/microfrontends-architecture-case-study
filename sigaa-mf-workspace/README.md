@@ -31,7 +31,7 @@ A descrição detalhada da arquitetura, estrutura dos microfrontends, responsabi
 
 _Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
 
-Versão completa:
+Versão PDF:
 [PDF](./docs/Arquitetura.pdf)
 
 ## Stack Tecnológica
