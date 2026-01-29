@@ -1,4 +1,4 @@
-Leia também em português: [README.pt-BR.md](README.pt-br.md)
+_Leia também em português_ 🥇 [README.pt-BR.md](README.pt-br.md)
 
 # Micro Frontends Architecture Case Study (Angular)
 
