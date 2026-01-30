@@ -86,4 +86,14 @@ npx cypress run
 
 - Os testes focam na integração de rotas federadas, não em testes funcionais completos de UI.
 
+## Testes E2E (Cypress) inclusos nessa versão
 
+Testes de integração de microfrontends via shell:
+
+```bash
+npx cypress open
+```
+Specs incluídos:
+
+- mfe-routing.cy.ts — carregamento de MFEs via rotas
+- mfe-fallback.cy.ts — fallback quando remote falha

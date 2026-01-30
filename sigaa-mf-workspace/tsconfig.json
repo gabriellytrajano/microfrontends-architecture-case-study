@@ -15,7 +15,8 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@shared-ui": ["projects/shared-ui/src/public-api.ts"]
+      "@shared-ui": ["projects/shared-ui/src/public-api.ts"],
+      "@shell-core": ["projects/shell/src/app/core/index.ts"]
     },
     "importHelpers": true,
     "target": "ES2022",
