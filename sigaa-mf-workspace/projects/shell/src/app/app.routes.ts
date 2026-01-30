@@ -1,31 +1,41 @@
 import { Routes } from '@angular/router';
-import { loadRemoteModule } from '@angular-architects/module-federation';
 import { DashboardPage } from './pages/dashboard/dashboard.page';
+import { MFE_REMOTES, loadRemoteRoutes } from '@shell-core';
 
 export const routes: Routes = [
-  {
+
+   {
     path: '',
-    pathMatch: 'full',
     component: DashboardPage,
+  },
+
+  {
+    path: 'auth',
+    loadChildren: () =>
+      loadRemoteRoutes({
+        remoteEntry: MFE_REMOTES['auth'].url,
+        exposedModule: MFE_REMOTES['auth'].exposedModule,
+        exportName: 'routes',
+      }),
   },
 
   {
     path: 'users',
     loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        exposedModule: './Routes',
-      }).then(m => m.routes),
+      loadRemoteRoutes({
+        remoteEntry: MFE_REMOTES['user'].url,
+        exposedModule: MFE_REMOTES['user'].exposedModule,
+        exportName: 'routes',
+      }),
   },
 
   {
     path: 'access-control',
     loadChildren: () =>
-      loadRemoteModule({
-        type: 'module',
-        remoteEntry: 'http://localhost:4203/remoteEntry.js',
-        exposedModule: './Routes',
-      }).then(m => m.routes),
+      loadRemoteRoutes({
+        remoteEntry: MFE_REMOTES['accessControl'].url,
+        exposedModule: MFE_REMOTES['accessControl'].exposedModule,
+        exportName: 'routes',
+      }),
   },
 ];
