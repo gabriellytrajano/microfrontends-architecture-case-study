@@ -127,6 +127,21 @@ Versão PDF:
 
 A comunicação entre MFEs foi intencionalmente limitada a limites de navegação.
 
+## Validação Arquitetural Automatizada
+
+A arquitetura de integração Shell ↔ Micro Frontends foi validada com testes End-to-End automatizados.
+
+Os testes cobrem:
+
+- carregamento de MFEs via Module Federation
+
+- resolução de rotas remotas no Shell
+
+- composição correta de prefixos de rota (shell + rotas internas do MFE)
+
+- renderização de fallback quando um microfrontend remoto falha
+
+Esses testes foram usados como mecanismo de verificação de boundary, roteamento e estratégia de fallback da arquitetura proposta.
 
 ## Decisão Arquitetural — Padrão de Integração dos Micro Frontends
 
