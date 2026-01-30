@@ -1,8 +1,5 @@
 # ADR 002 — Boundary do Domínio de Access Control
 
-## Status
-Accepted
-
 ## Context
 
 O domínio de controle de acesso da plataforma inclui três entidades principais:
