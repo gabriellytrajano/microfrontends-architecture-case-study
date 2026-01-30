@@ -50,3 +50,40 @@ Se for a primeira vez buildando o projeto, builde todos os mfes:
 
 Para formatar o projeto com Prettier:
 ```npm run format```
+
+## Testes de Integração (Cypress)
+
+O workspace possui testes de integração para validar o carregamento dos Micro Frontends via Module Federation.
+
+Os testes verificam o fluxo:
+
+Shell → rota → carregamento do remote → renderização
+
+### Pré-requisito
+
+Antes de rodar os testes, todos os MFEs e o Shell devem estar em execução.
+```npm run:run all```
+
+### Abrir interface do Cypress
+
+```npx cypress open```
+
+Selecionar o teste em:
+
+cypress/e2e/
+
+### Rodar em modo headless
+
+npx cypress run
+
+### Escopo atual dos testes
+
+- valida carregamento de rotas remotas
+
+- valida montagem de Micro Frontend
+
+- valida renderização básica de página
+
+- Os testes focam na integração de rotas federadas, não em testes funcionais completos de UI.
+
+
