@@ -295,7 +295,7 @@ Isso gera duplicação de prefixo e falha de match de rota em runtime.
 
 - menor acoplamento entre MFEs
 
-</details> ```
+</details>
 
 
 
