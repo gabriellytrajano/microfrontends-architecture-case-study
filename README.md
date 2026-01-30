@@ -84,6 +84,13 @@ As decisões arquiteturais foram principalmente orientadas pelos seguintes requi
 
 ## Principais Decisões Arquiteturais
 
+## Architecture Decision Records (ADR)
+
+As principais decisões arquiteturais desta PoC foram registradas formalmente como ADRs (Architecture Decision Records), garantindo rastreabilidade técnica e clareza de critérios de escolha.
+
+- [ADR 001 — Route-based Microfrontend Integration](./sigaa-mf-workspace/docs/adr/001-route-based-mfe-integration.md)
+- [ADR 002 — Access Control Domain Boundary](./sigaa-mf-workspace/docs/adr/002-access-control-boundary.md)
+
 - **Micro Frontends** foram propostos e defendidos como uma escolha estratégica para suportar escalabilidade organizacional de longo prazo.
 - **Module Federation (Webpack 5)** foi selecionado para composição em tempo de execução e compartilhamento controlado de dependências.
 - **Angular 17** foi escolhido por maturidade do framework, estabilidade e adequação a aplicações de grande porte.
@@ -102,10 +109,95 @@ _Author: Gabrielly Amorin — 2026 — Microfrontend PoC_
 Versão PDF:
 [Desenho da arquitetura em PDF](./sigaa-mf-workspace/docs/Arquitetura.pdf)
 
+
+---
+
+## Decisão Arquitetural — Padrão de Integração dos Micro Frontends
+
+<details>
+<summary>Ver decisão detalhada de integração Shell ↔ Micro Frontends</summary>
+
+### Decisão
+
+A integração entre Shell e Micro Frontends adota **Route-based Module Federation**, onde cada MFE expõe rotas Angular e é carregado dinamicamente via lazy loading do router.
+
+---
+
+### Alternativa não adotada
+
+Lifecycle imperativo:
+mount(container)
+unmount()
+
+Rejeitado por aumentar complexidade runtime e romper integração nativa com Angular Router.
+
+---
+
+### Justificativa técnica
+
+- Todos os MFEs usam Angular
+- Boundary natural baseado em rota
+- Compatível com guards, resolvers e DI
+- Sem lifecycle manual de DOM
+- Melhor testabilidade
+- Menor código de infraestrutura
+
+---
+
+### Pipeline de carregamento
+
+remoteEntry → exposed routes → router lazy load → módulo → render
+
+</details>
+
+---
+
+## Decisão Arquitetural — Boundary do MFE Access Control
+
+<details>
+<summary>Ver decisão de agrupamento de Papéis, Permissões e Recursos</summary>
+
+### Decisão
+
+Papéis, Permissões e Recursos foram agrupados dentro de um único microfrontend de **Access Control**.
+
+---
+
+### Justificativa técnica
+
+- Alta coesão funcional
+- Mudança frequente conjunta
+- Mesmo fluxo de autorização
+- Redução de contratos inter-MFE
+- Menor complexidade de integração
+
+---
+
+### Alternativa rejeitada
+
+Separar em MFEs distintos geraria:
+
+- fragmentação de domínio
+- maior coordenação
+- mais contratos runtime
+- mais pontos de falha
+
+---
+
+### Critério de boundary aplicado
+subdomínio coeso + taxa de mudança conjunta + fluxo funcional integrado
+
+Tradeoff aceito: deploy conjunto dentro do subdomínio de segurança.
+
+</details>
+
+---
+
 - **Shell Application**
   - Ponto de entrada da aplicação
   - Orquestração de rotas
   - Carregamento dinâmico dos MFEs
+  - Integração via Route-based Module Federation
 
 - **Micro Frontends**
   - Isolados por domínio funcional
@@ -120,6 +212,92 @@ Versão PDF:
 A comunicação entre MFEs foi intencionalmente limitada a limites de navegação.
 
 ---
+
+## Política de Roteamento — Shell vs Micro Frontends
+
+<details>
+<summary>Ver regras de definição de rotas em arquitetura com Module Federation</summary>
+
+### Shell Route Prefix Policy
+
+O Shell é responsável por definir os **prefixos de rota de domínio** para cada Micro Frontend.
+
+Cada MFE é montado sob um prefixo único definido no router do Shell.
+
+Exemplo:
+
+```ts
+// shell/app.routes.ts
+{
+  path: 'users',
+  loadChildren: () => loadRemoteRoutes(...)
+}
+```
+
+Resultado:
+
+/users → ativa o MFE de usuários
+
+O prefixo de domínio é sempre definido no Shell, nunca no remote.
+
+---
+
+## Remote Child Route Policy
+
+Cada Micro Frontend define apenas **rotas internas relativas**, sem repetir o prefixo de domínio.
+
+Exemplo correto no remote:
+```ts
+export const routes = [
+  { path: '', component: UserListPage },
+  { path: 'new', component: UserCreatePage },
+  { path: ':id', component: UserDetailPage }
+];
+
+```
+URLs finais:
+
+/users
+/users/new
+/users/123
+
+---
+
+## Regra de Boundary de Roteamento
+Regra de Boundary de Roteamento
+
+URL final = shell prefix + remote child route
+
+---
+
+## Anti-pattern evitado
+
+Não declarar prefixo de domínio dentro do remote:
+
+```ts
+// ❌ incorreto no remote
+{ path: 'users', children: [...] }
+```
+
+Isso gera duplicação de prefixo e falha de match de rota em runtime.
+
+---
+
+## Benefícios
+
+- ownership claro de domínio no Shell
+
+- rotas internas isoladas por MFE
+
+- composição previsível de URLs
+
+- suporte correto a deep linking
+
+- menor acoplamento entre MFEs
+
+</details> ```
+
+
 
 ## O Que Ficou Intencionalmente Fora do Escopo
 
@@ -161,5 +339,5 @@ São apropriados quando há expectativa real de escalabilidade organizacional e 
 - Proposição e validação da adoção de Micro Frontends  
 - Seleção das tecnologias base  
 - Liderança das decisões arquiteturais e da estrutura do código  
-- Orientação de contribuidores juniores e distribuição de tarefas-
+- Orientação de contribuidores juniores e distribuição de tarefas  
 - Tradução de uma proposta institucional de alto nível em decisões arquiteturais concretas de frontend
