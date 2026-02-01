@@ -1,0 +1,1 @@
+export type MfeKey = 'user' | 'access-control';
