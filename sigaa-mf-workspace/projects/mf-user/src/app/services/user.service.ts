@@ -6,13 +6,6 @@ import { UpdateUserPayload, UsuarioDTO } from '../models/user.model';
 import { Funcao } from 'projects/mf-access-control/src/models/funcao.model';
 import { FuncaoService } from 'projects/mf-access-control/src/service/funcao.service';
 
-interface UserApi {
-  id: string;
-  nome: string;
-  cpfCnpj: number;
-  email: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private readonly apiUrl = '/api/professor';
