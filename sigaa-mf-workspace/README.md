@@ -34,6 +34,7 @@ A descrição detalhada da arquitetura, estrutura dos microfrontends, responsabi
 - SCSS
 - Webpack 5 (Module Federation)
 - Prettier
+- Cypress
 
 ## Como Rodar o Projeto
 
