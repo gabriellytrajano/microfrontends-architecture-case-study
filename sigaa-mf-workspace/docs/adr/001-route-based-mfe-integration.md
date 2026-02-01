@@ -31,7 +31,8 @@ exposes: {
 
 Shell consome:
 
-remoteEntry → exposed routes → router lazy load → feature module → render
+remoteEntry → exposed routes → router lazy load → route configuration → render
+
 
 ---
 
@@ -87,6 +88,34 @@ A decisão foi baseada nos seguintes critérios técnicos:
 - não é indicado para cenários de widget/plugin runtime
 
 ---
+
+## Refinamentos de Implementação
+
+Após a decisão inicial de adotar integração baseada em rotas, a arquitetura foi refinada para garantir consistência, previsibilidade e baixo acoplamento entre Shell e Micro Frontends.
+
+### Contrato explícito Shell ↔ Micro Frontend
+
+O Shell define um contrato mínimo esperado de cada Micro Frontend, contendo apenas as informações necessárias para o carregamento de rotas:
+
+- `remoteEntry`
+- `exposedModule`
+- `routePath`
+
+Esse contrato é centralizado no Shell e validado em tempo de execução para evitar falhas implícitas decorrentes de deploys independentes.
+
+### Exposição de rotas como contrato
+
+Cada Micro Frontend expõe explicitamente um símbolo fixo (`ROUTES`) via Module Federation.
+
+O Shell consome apenas rotas, e nunca componentes ou APIs imperativas, reforçando o padrão de integração declarativa baseada no Angular Router.
+
+### Separação de responsabilidades
+
+O carregamento remoto é tratado como infraestrutura pura. O loader não decide fallback nem contém lógica de UX.
+
+A responsabilidade por estratégias de fallback, tratamento de erro e composição de navegação pertence exclusivamente ao Shell, por meio do Angular Router.
+
+Essa separação evita acoplamento entre infraestrutura e experiência do usuário, além de permitir observabilidade e extensões futuras (ex.: retry).
 
 ## Decisão Final
 

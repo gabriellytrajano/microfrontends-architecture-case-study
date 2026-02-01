@@ -179,6 +179,75 @@ remoteEntry → exposed routes → router lazy load → módulo → render
 
 </details>
 
+## Implementação Técnica — Contrato Shell ↔ Micro Frontends
+
+A integração entre Shell e Micro Frontends foi implementada com um **contrato explícito e defensivo**, visando reduzir acoplamento e falhas em runtime.
+
+### Contrato mínimo
+
+O Shell define um contrato mínimo esperado de cada MFE:
+
+- `remoteEntry`: endereço do remote
+- `exposedModule`: módulo exposto via Module Federation
+- `routePath`: prefixo de rota definido no Shell
+
+```ts
+interface RemoteRouteContract {
+  remoteEntry: string;
+  exposedModule: string;
+  routePath: string;
+}
+```
+
+Esse contrato é centralizado no Shell e tipado como:
+```ts
+Record<MfeKey, RemoteRouteContract>
+```
+
+garantindo segurança em tempo de build contra chaves inválidas.
+
+### Validação em runtime
+
+Como contratos podem falhar em tempo de execução (deploy independente), o loader recebe o contrato como unknown e realiza validação explícita antes do carregamento:
+```ts
+assertRemoteContract(config);
+```
+Essa abordagem evita confiar apenas na tipagem estática e garante falhas previsíveis.
+
+### Loader remoto
+
+O loader de MFEs é tratado como infraestrutura pura e retorna um estado explícito:
+
+- ready: rotas carregadas com sucesso
+
+- failed: erro durante o carregamento
+
+O loader não decide fallback nem contém lógica de UX.
+
+### Estratégia de fallback
+
+A decisão de fallback é responsabilidade do Router do Shell, permitindo:
+
+- controle explícito de erro
+
+- nobservabilidade
+
+- possibilidade futura de retry
+
+Esse desenho mantém separação clara entre infraestrutura e experiência do usuário.
+
+### Contrato de rotas nos MFEs
+
+Cada Micro Frontend expõe explicitamente um símbolo ROUTES via Module Federation:
+
+```ts
+export const ROUTES: Routes = [...]
+```
+
+O Shell carrega apenas rotas, não componentes, reforçando o padrão de route-based federation e evitando lifecycle imperativo.
+
+
+
 
 ## Decisão Arquitetural — Boundary do MFE Access Control
 

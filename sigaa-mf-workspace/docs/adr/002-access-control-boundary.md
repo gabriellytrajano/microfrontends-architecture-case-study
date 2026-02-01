@@ -122,6 +122,20 @@ coesão funcional + taxa de mudança conjunta + fluxo integrado
 
 e não por entidade de dados isolada.
 
+## Implicações de Integração
+
+O microfrontend de Access Control é integrado ao sistema por meio de **Route-based Module Federation**.
+
+O Shell define o prefixo de rota do domínio (ex.: `/access-control`) e carrega dinamicamente as rotas expostas pelo MFE.
+
+O MFE de Access Control expõe apenas suas rotas internas, sem conhecimento do prefixo global, preservando:
+
+- isolamento de domínio
+- clareza de ownership
+- consistência com a política de roteamento da plataforma
+
+Essa abordagem garante que a decisão de boundary de domínio esteja alinhada à estratégia de integração adotada para todos os Micro Frontends da plataforma.
+
 
 
 
