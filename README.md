@@ -4,7 +4,7 @@ _Read in English:_ [English ver.](README-ENG.md)
 
 ## Resumo Executivo
 
-Este repositório documenta um case study real de arquitetura frontend para uma plataforma de gestão acadêmica escalável, com potencial de adoção em nível nacional.
+Este repositório documenta um case study real de arquitetura frontend, construído como uma prova de conceito arquitetural, com potencial de aplicação em cenários institucionais de larga escala.
 
 Atuei como **Frontend Technical Lead**, sendo responsável por definir a arquitetura frontend, propor e validar o uso de Micro Frontends com Module Federation e selecionar o Angular 17 como framework base, priorizando estabilidade e adequação a ambientes corporativos.
 
@@ -32,12 +32,11 @@ O principal desafio foi projetar uma arquitetura frontend capaz de sustentar man
 ## Restrições e Premissas
 
 ### Institucionais
-- Implantação inicial limitada a uma única universidade (UFCG)
+- Implantação inicial limitada a uma única universidade para fins de validação da prova de conceito.
 - Expansão futura condicionada à aprovação e financiamento governamental (MEC)
 - Ausência de uma estratégia de migração previamente definida a partir de sistemas legados
 
 ### Técnicas
-- Backend projetado com base em microserviços desacoplados
 - Frontend com necessidade de evolução independente entre domínios
 - Arquitetura flexível quanto a estratégias de adoção e implantação
 
@@ -56,7 +55,7 @@ As decisões arquiteturais foram principalmente orientadas pelos seguintes requi
 
 - **Deploys independentes**, reduzindo overhead de coordenação
 - **Clareza de ownership de domínios**, suportando crescimento futuro de times
-- **Blast radius controlado**, limitando o impacto de mudanças
+- **Blast radius controlado**, em mudanças de frontend
 - **Manutenibilidade de longo prazo** acima de velocidade inicial de entrega
 - **Flexibilidade diante de incertezas institucionais**
 
@@ -77,7 +76,7 @@ As decisões arquiteturais foram principalmente orientadas pelos seguintes requi
 ### Micro Frontends com Module Federation
 - Deploys independentes
 - Clareza de domínios
-- Alinhamento com backend em microserviços  
+- Evolução desacoplada entre áreas funcionais
 → Selecionada para validação, apesar da maior complexidade
 
 ---
@@ -87,13 +86,15 @@ As decisões arquiteturais foram principalmente orientadas pelos seguintes requi
 - **Micro Frontends** foram propostos e defendidos como uma escolha estratégica para suportar escalabilidade organizacional de longo prazo.
 - **Module Federation (Webpack 5)** foi selecionado para composição em tempo de execução e compartilhamento controlado de dependências.
 - **Angular 17** foi escolhido por maturidade do framework, estabilidade e adequação a aplicações de grande porte.
-- Uma **Shared UI Library** foi introduzida desde o início para centralizar componentes reutilizáveis e garantir consistência visual sob restrições de tooling.
+- Uma **Shared UI Library** foi introduzida desde o início para centralizar componentes reutilizáveis e garantir consistência visual sob restrições de tooling, projetada para evoluir de forma independente dos MFEs,
+evitando duplicação de componentes e divergência visual.
 
 Todas as decisões arquiteturais de frontend foram lideradas e validadas pela Frontend Technical Lead.
 
 ### Architecture Decision Records (ADR)
 
 As principais decisões arquiteturais desta PoC foram registradas formalmente como ADRs (Architecture Decision Records), garantindo rastreabilidade técnica e clareza de critérios de escolha.
+O uso de ADRs foi adotado para evitar decisões implícitas, documentar trade-offs e permitir evolução consciente da arquitetura ao longo do tempo.
 
 - [ADR 001 — Route-based Microfrontend Integration](./sigaa-mf-workspace/docs/adr/001-route-based-mfe-integration.md)
 - [ADR 002 — Access Control Domain Boundary](./sigaa-mf-workspace/docs/adr/002-access-control-boundary.md)
@@ -142,6 +143,7 @@ Os testes cobrem:
 - renderização de fallback quando um microfrontend remoto falha
 
 Esses testes foram usados como mecanismo de verificação de boundary, roteamento e estratégia de fallback da arquitetura proposta.
+Os testes têm como objetivo validar contratos e integração, não substituir uma suíte completa de testes de produto.
 
 ## Decisão Arquitetural — Padrão de Integração dos Micro Frontends
 
@@ -206,6 +208,9 @@ Record<MfeKey, RemoteRouteContract>
 
 garantindo segurança em tempo de build contra chaves inválidas.
 
+Essa estratégia foi adotada considerando o contexto de deploys independentes entre Shell e Micro Frontends, onde contratos podem falhar em tempo de execução.
+O objetivo foi tratar falhas de integração como eventos esperados, garantindo previsibilidade e isolamento de impacto.
+
 ### Validação em runtime
 
 Como contratos podem falhar em tempo de execução (deploy independente), o loader recebe o contrato como unknown e realiza validação explícita antes do carregamento:
@@ -230,7 +235,7 @@ A decisão de fallback é responsabilidade do Router do Shell, permitindo:
 
 - controle explícito de erro
 
-- nobservabilidade
+- observabilidade
 
 - possibilidade futura de retry
 
@@ -405,3 +410,4 @@ São apropriados quando há expectativa real de escalabilidade organizacional e 
 - Liderança das decisões arquiteturais e da estrutura do código  
 - Orientação de contribuidores juniores e distribuição de tarefas  
 - Tradução de uma proposta institucional de alto nível em decisões arquiteturais concretas de frontend
+- As responsabilidades descritas refletem atuação técnica real no contexto desta prova de conceito arquitetural.
