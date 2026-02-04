@@ -43,6 +43,7 @@ O principal desafio foi projetar uma arquitetura frontend capaz de sustentar man
 ### Design e Ferramentas
 - Ausência de financiamento governamental inicial
 - Time de design operando com ferramentas gratuitas
+- O design visual da interface e diretrizes de UI foram concebidos por Geysla Bezerra (UX UI Designer), servindo como base para a implementação dos componentes frontend.
 - Sem acesso a bibliotecas pagas de componentes ou UI kits
 
 Como consequência, todos os componentes de interface foram desenhados e implementados manualmente.
