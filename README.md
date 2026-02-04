@@ -104,9 +104,7 @@ As principais decisões arquiteturais desta PoC foram registradas formalmente co
 
 ![Arquitetura](./sigaa-mf-workspace/docs/Arquitetura.jpg)
 
-Autora do desenho arquitetural: Gabrielly Trajano Amorin  
-Ano: 2026  
-Contexto: Microfrontends PoC — SigUni  
+_Autora: Gabrielly Trajano Amorin, 2026, Microfrontends PoC — SigUni_
 
 Versão PDF:
 [Desenho da arquitetura em PDF](./sigaa-mf-workspace/docs/Arquitetura.pdf)
